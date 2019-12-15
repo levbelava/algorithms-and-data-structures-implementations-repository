@@ -1,1 +1,1 @@
-# algorithms-and-data-structures-implementations-repository
+### ALGOREPO is a collection of easy to understand implementations of various data structures and algorithms in different programming languages
