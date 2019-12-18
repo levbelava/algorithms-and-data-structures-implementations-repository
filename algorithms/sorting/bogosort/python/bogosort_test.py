@@ -1,6 +1,6 @@
 import unittest
 
-from algorithms.sorting.bogosort.python.bogosort import bogosort
+from bogosort import bogosort
 
 
 class MyTestCase(unittest.TestCase):
@@ -17,5 +17,4 @@ class MyTestCase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    print(bogosort([3, 2, 1, 0]))
     unittest.main()
