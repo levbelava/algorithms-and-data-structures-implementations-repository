@@ -22,43 +22,43 @@ public class ParallelBitonicSort {
         bitonicSort(inputData, 0, inputData.length, ASCENDING);
     }
 
-    private void bitonicSort(int[] data, int startingElement, int amountToSort, boolean sortingDirection) throws InterruptedException {
+    private void bitonicSort(int[] data, int startingIndex, int amountToSort, boolean sortingDirection) throws InterruptedException {
         if (amountToSort < 2) {
             return;
         }
         int halfAmount = amountToSort / 2;
-        bitonicSort(data, startingElement, halfAmount, ASCENDING);
-        bitonicSort(data, startingElement + halfAmount, halfAmount, DESCENDING);
-        bitonicMerge(data, startingElement, amountToSort, sortingDirection);
+        bitonicSort(data, startingIndex, halfAmount, ASCENDING);
+        bitonicSort(data, startingIndex + halfAmount, halfAmount, DESCENDING);
+        bitonicMerge(data, startingIndex, amountToSort, sortingDirection);
     }
 
-    private void bitonicMerge(int[] data, int startingElement, int amountToMerge, boolean sortingDirection) throws InterruptedException {
+    private void bitonicMerge(int[] data, int startingIndex, int amountToMerge, boolean sortingDirection) throws InterruptedException {
         if (amountToMerge < 2) {
             return;
         }
         final int halfAmountToMerge = amountToMerge / 2;
-        executeComparatorsInParallelMode(data, startingElement, sortingDirection, halfAmountToMerge);
-        bitonicMerge(data, startingElement, halfAmountToMerge, sortingDirection);
-        bitonicMerge(data, startingElement + halfAmountToMerge, halfAmountToMerge, sortingDirection);
+        executeComparatorsInParallelMode(data, startingIndex, sortingDirection, halfAmountToMerge);
+        bitonicMerge(data, startingIndex, halfAmountToMerge, sortingDirection);
+        bitonicMerge(data, startingIndex + halfAmountToMerge, halfAmountToMerge, sortingDirection);
     }
 
-    private void executeComparatorsInParallelMode(int[] data, int startingElement, boolean sortingDirection, int halfAmountToMerge) throws InterruptedException {
+    private void executeComparatorsInParallelMode(int[] data, int startingIndex, boolean sortingDirection, int halfAmountToMerge) throws InterruptedException {
         ExecutorService executor = newFixedThreadPool(halfAmountToMerge);
-        for (int i = startingElement; i < startingElement + halfAmountToMerge; i++) {
-            final int currentElement = i;
-            executor.submit(() -> compareAndSwap(data, currentElement, currentElement + halfAmountToMerge, sortingDirection));
+        for (int i = startingIndex; i < startingIndex + halfAmountToMerge; i++) {
+            final int currentIndex = i;
+            executor.submit(() -> compareAndSwap(data, currentIndex, currentIndex + halfAmountToMerge, sortingDirection));
         }
         executor.shutdown();
         executor.awaitTermination(MAX_VALUE, TimeUnit.SECONDS);
     }
 
-    private void compareAndSwap(int[] data, int firstToCompare, int secondToCompare, boolean sortingDirection) {
-        if ((data[firstToCompare] > data[secondToCompare] && sortingDirection == ASCENDING)
+    private void compareAndSwap(int[] data, int firstIndexToCompare, int secondIndexToCompare, boolean sortingDirection) {
+        if ((data[firstIndexToCompare] > data[secondIndexToCompare] && sortingDirection == ASCENDING)
                 ||
-                (data[firstToCompare] < data[secondToCompare] && sortingDirection == DESCENDING)) {
-            int temp = data[firstToCompare];
-            data[firstToCompare] = data[secondToCompare];
-            data[secondToCompare] = temp;
+                (data[firstIndexToCompare] < data[secondIndexToCompare] && sortingDirection == DESCENDING)) {
+            int temp = data[firstIndexToCompare];
+            data[firstIndexToCompare] = data[secondIndexToCompare];
+            data[secondIndexToCompare] = temp;
         }
     }
 
