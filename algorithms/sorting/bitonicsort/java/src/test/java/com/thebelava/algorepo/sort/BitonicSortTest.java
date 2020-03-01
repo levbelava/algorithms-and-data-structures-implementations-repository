@@ -21,9 +21,7 @@ class BitonicSortTest {
 
     @Test
     public void verifiesNonPowerOfTwoNumberOfElementsToSort() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            bitonicSort.sort(new int[]{1, 2, 3});
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> bitonicSort.sort(new int[]{1, 2, 3}));
         assertTrue(exception.getMessage().contains("Sorts only arrays with a number of elements that a power of 2!"));
     }
 

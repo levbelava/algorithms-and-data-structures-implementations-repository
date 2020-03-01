@@ -9,7 +9,7 @@ import static java.util.concurrent.Executors.newFixedThreadPool;
 
 
 public class ParallelBeadSort {
-    private int max_thread_count;
+    private final int max_thread_count;
 
     public ParallelBeadSort(int max_thread_count) {
         this.max_thread_count = max_thread_count;

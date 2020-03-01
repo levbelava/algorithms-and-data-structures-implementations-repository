@@ -13,7 +13,7 @@ public class ParallelBogosort {
         if (isNothingToSort(inputData)) {
             return inputData;
         }
-        final LinkedBlockingQueue<int[]> resultHolderQueue = new LinkedBlockingQueue<int[]>();
+        final LinkedBlockingQueue<int[]> resultHolderQueue = new LinkedBlockingQueue<>();
         final CountDownLatch resultIsReadyLatch = new CountDownLatch(1);
         for (int i = 0; i < numberOfThreads; i++) {
             createBogosortWorker(inputData, resultHolderQueue, resultIsReadyLatch).start();
