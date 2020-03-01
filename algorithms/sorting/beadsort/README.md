@@ -4,5 +4,7 @@ Some limitations can be overcome by such modifications of algorithm as:
 * to sort negative numbers one can add "baseline value" for every element so that numbers will be positive;
 * inefficiency of single thread implementation can be overcome by using parallel implementation since this algorithms parallels naturally.
  
+ 
+Complexity:
 * Memory complexity O(n^2)
 * Hardware specific average performance O(n)
