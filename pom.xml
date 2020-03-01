@@ -13,6 +13,7 @@
         <module>algorithms/sorting/bogosort/java</module>
         <module>algorithms/sorting/beadsort/java</module>
         <module>algorithms/sorting/bitonicsort/java</module>
+        <module>algorithms/sorting/quicksort/java</module>
     </modules>
 
     <dependencies>
